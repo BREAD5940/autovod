@@ -267,7 +267,7 @@ while true; do
 			# to a twitch.tv channel using RTMPS. The stream is re-muxed to a format
 			# that is compatible with RTMPS. The stream is also re-encoded to a
 			# format that is compatible with RTMPS.
-			if ! streamlink $STREAM_SOURCE_URL $STREAMLINK_OPTIONS "${STREAMLINK_FLAGS[@]}" -O 2>/dev/null | ffmpeg -re -i - -ar $AUDIO_BITRATE -acodec $AUDIO_CODEC -vcodec copy -f $FILE_FORMAT "$RTMPS_URL""$RTMPS_STREAM_KEY" >/dev/null 2>&1; then
+			if ! streamlink $STREAM_SOURCE_URL $STREAMLINK_OPTIONS "${STREAMLINK_FLAGS[@]}" -O 2>/dev/null | ffmpeg -re -i - -an -vcodec copy -f $FILE_FORMAT "$RTMPS_URL""$RTMPS_STREAM_KEY" >/dev/null 2>&1; then
 				echo "$($CC) ffmpeg failed re-streaming the stream"
 			else # If the stream was re-streamed
 				echo "$($CC) Stream re-streamed to $RTMPS_CHANNEL"
